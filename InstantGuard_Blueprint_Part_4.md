@@ -1,6 +1,6 @@
-# MVP Blueprint Part 4: High-Level Implementation Plan
+# InstantGuard Blueprint Part 4: High-Level Implementation Plan
 
-This document provides a high-level timeline and resource estimate for the phased rollout of the on-demand security platform MVP. The timeline is an aggressive but achievable estimate for a focused, dedicated development team.
+This document provides a high-level timeline and resource estimate for the phased rollout of InstantGuard. The timeline is an aggressive but achievable estimate for a focused, dedicated development team.
 
 ---
 
@@ -45,7 +45,7 @@ The project is broken down into three distinct phases. The total estimated time 
     *   Run the live pilot, closely monitoring all systems and key performance metrics.
     *   Provide real-time support for users and responders.
     *   Continuously gather qualitative feedback.
-    *   Analyze the collected data to validate the MVP's core assumptions and inform the strategy for a wider rollout.
+    *   Analyze the collected data to validate InstantGuard's core assumptions and inform the strategy for a wider rollout.
 
 ---
 

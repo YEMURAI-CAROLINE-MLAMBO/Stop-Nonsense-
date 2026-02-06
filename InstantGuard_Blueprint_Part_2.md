@@ -1,12 +1,12 @@
-# MVP Blueprint Part 2: Feature Scope & Technology Stack
+# InstantGuard Blueprint Part 2: Feature Scope & Technology Stack
 
-This document details the specific features required for the MVP and recommends a pragmatic technology stack for its development.
+This document details the specific features required for InstantGuard and recommends a pragmatic technology stack for its development.
 
 ---
 
-### 1. MVP Feature Scope
+### 1. InstantGuard Feature Scope
 
-The MVP is comprised of three distinct software components: the User Application, the Responder Application, and the Backend Platform.
+InstantGuard is comprised of three distinct software components: the User Application, the Responder Application, and the Backend Platform.
 
 #### A. User Application (Mobile)
 
@@ -50,7 +50,7 @@ The primary goal is to provide clear, actionable information with minimal distra
 
 #### C. Backend Platform & Dispatch Logic
 
-This is the central nervous system of the platform.
+This is the central nervous system of InstantGuard.
 
 *   **User & Responder Management:**
     *   `[Feature]` Secure databases for user and responder profiles, credentials, and associated data.
@@ -72,10 +72,10 @@ This is the central nervous system of the platform.
 
 ### 2. Recommended Technology Stack
 
-This stack is chosen for speed of development, scalability, and cost-effectiveness for an MVP.
+This stack is chosen for speed of development, scalability, and cost-effectiveness for InstantGuard.
 
 *   **Mobile Applications (User & Responder):**
-    *   **Framework:** **React Native**. It enables the development of both iOS and Android apps from a single TypeScript/JavaScript codebase, significantly reducing MVP development time and cost.
+    *   **Framework:** **React Native**. It enables the development of both iOS and Android apps from a single TypeScript/JavaScript codebase, significantly reducing InstantGuard development time and cost.
 
 *   **Backend:**
     *   **Runtime/Framework:** **Node.js** with **NestJS** (a TypeScript framework). This choice provides high performance for real-time I/O operations and maintains language consistency with the frontend.
@@ -83,7 +83,7 @@ This stack is chosen for speed of development, scalability, and cost-effectivene
     *   **Real-time Communication:** **WebSockets** (e.g., via the Socket.IO library) to manage the instantaneous communication needed for alerts and location updates.
 
 *   **Infrastructure & Deployment:**
-    *   **Cloud Provider:** **Amazon Web Services (AWS)** or **Google Cloud Platform (GCP)**. Both offer the necessary suite of managed services, scalability, and free tiers suitable for an MVP.
+    *   **Cloud Provider:** **Amazon Web Services (AWS)** or **Google Cloud Platform (GCP)**. Both offer the necessary suite of managed services, scalability, and free tiers suitable for InstantGuard.
     *   **Application Hosting:** A Platform-as-a-Service (PaaS) like **AWS Elastic Beanstalk** or **Google App Engine** to simplify deployment and scaling of the Node.js backend.
     *   **Database Hosting:** A managed database service like **Amazon RDS for PostgreSQL** or **Google Cloud SQL** to offload the burden of database maintenance, backups, and scaling.
     *   **Containerization:** **Docker** to ensure a consistent environment for the backend application from development through to production.

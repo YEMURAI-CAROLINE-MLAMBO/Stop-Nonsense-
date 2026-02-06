@@ -1,6 +1,6 @@
-# MVP Blueprint Part 3: Phased Project Rollout
+# InstantGuard Blueprint Part 3: Phased Project Rollout
 
-This document outlines a strategic, three-phase approach to building, testing, and launching the on-demand security platform MVP. The goal is to validate the riskiest assumptions first and gather real-world data before a full-scale launch.
+This document outlines a strategic, three-phase approach to building, testing, and launching InstantGuard. The goal is to validate the riskiest assumptions first and gather real-world data before a full-scale launch.
 
 ---
 
