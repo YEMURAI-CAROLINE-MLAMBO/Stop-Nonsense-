@@ -1,30 +1,43 @@
-import React from 'react';
-import { StatsOverview } from './components/StatsOverview';
+import React, { useState } from 'react';
+import { StatsOverview } from '../components/StatsOverview';
+import { SupportTicketList } from '../components/SupportTicketList';
+import { ResponderManagement } from '../components/ResponderManagement';
+import { InsightsView } from '../components/InsightsView';
 
 export function App() {
+  const [activeTab, setActiveTab] = useState('dashboard');
   return (
     <div style={styles.app}>
       <header style={styles.header}>
-        <h1 style={styles.title}>InstantGuard Admin Dashboard</h1>
+        <div style={styles.left}>
+          <h1 style={styles.title}>InstantGuard Admin</h1>
+          <nav style={styles.nav}>
+            <button onClick={() => setActiveTab('dashboard')} style={{...styles.navBtn, color: activeTab === 'dashboard' ? '#FFF' : '#AAA'}}>Dashboard</button>
+            <button onClick={() => setActiveTab('responders')} style={{...styles.navBtn, color: activeTab === 'responders' ? '#FFF' : '#AAA'}}>Responders</button>
+            <button onClick={() => setActiveTab('insights')} style={{...styles.navBtn, color: activeTab === 'insights' ? '#FFF' : '#AAA'}}>Insights</button>
+            <button onClick={() => setActiveTab('support')} style={{...styles.navBtn, color: activeTab === 'support' ? '#FFF' : '#AAA'}}>Support</button>
+          </nav>
+        </div>
         <div style={styles.user}>System Administrator</div>
       </header>
 
       <main style={styles.main}>
-        <StatsOverview />
+        {activeTab === 'dashboard' && (
+          <>
+            <StatsOverview />
+            <div style={styles.contentGrid}>
+              <section style={styles.section}>
+                <h2>Live Incident Map</h2>
+                <div style={styles.mapPlaceholder}>
+                  Interactive Map showing Johannesburg (Sandton/Fourways)
+                  <br />
+                  [3 Active Incidents | 12 Responders]
+                </div>
+              </section>
 
-        <div style={styles.contentGrid}>
-          <section style={styles.section}>
-            <h2>Live Incident Map</h2>
-            <div style={styles.mapPlaceholder}>
-              Interactive Map showing Johannesburg (Sandton/Fourways)
-              <br />
-              [3 Active Incidents | 12 Responders]
-            </div>
-          </section>
-
-          <section style={styles.section}>
-            <h2>Recent Incidents</h2>
-            <table style={styles.table}>
+              <section style={styles.section}>
+                <h2>Recent Incidents</h2>
+                <table style={styles.table}>
               <thead>
                 <tr>
                   <th>ID</th>
@@ -50,9 +63,15 @@ export function App() {
                   <td>13:45</td>
                 </tr>
               </tbody>
-            </table>
-          </section>
-        </div>
+                </table>
+              </section>
+            </div>
+          </>
+        )}
+
+        {activeTab === 'responders' && <ResponderManagement />}
+        {activeTab === 'insights' && <InsightsView />}
+        {activeTab === 'support' && <SupportTicketList />}
       </main>
     </div>
   );
@@ -67,11 +86,14 @@ const styles: Record<string, React.CSSProperties> = {
   header: {
     backgroundColor: '#000',
     color: '#FFF',
-    padding: '20px 40px',
+    padding: '10px 40px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  left: { display: 'flex', alignItems: 'center', gap: '40px' },
+  nav: { display: 'flex', gap: '20px' },
+  navBtn: { background: 'none', border: 'none', cursor: 'pointer', fontSize: '16px' },
   title: { margin: 0, fontSize: '20px' },
   main: { padding: '40px' },
   contentGrid: {

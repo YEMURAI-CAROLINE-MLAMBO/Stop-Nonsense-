@@ -2,18 +2,28 @@ import React, { useState } from 'react';
 import { View, StyleSheet, SafeAreaView, Text, TouchableOpacity } from 'react-native';
 import { PanicButton } from '@instant-guard/ui';
 import { translations } from '@instant-guard/i18n';
+import { useVoiceAssistance } from '@instant-guard/voice';
+import { useEffect } from 'react';
 
 export const HomeScreen = ({ navigation }: any) => {
+  const { startListening, recognizedText } = useVoiceAssistance();
   const [isDispatching, setIsDispatching] = useState(false);
   const t = translations.en; // Mocking translation for now
 
   const handlePanic = () => {
     setIsDispatching(true);
+    startListening();
     // In a real app, this triggers the Socket.io event 'triggerPanic'
     setTimeout(() => {
       navigation.navigate('IncidentTracking', { incidentId: 'IG-' + Math.floor(Math.random() * 1000) });
     }, 2000);
   };
+
+  useEffect(() => {
+    if (recognizedText.toLowerCase().includes('help')) {
+      handlePanic();
+    }
+  }, [recognizedText]);
 
   return (
     <SafeAreaView style={styles.container}>

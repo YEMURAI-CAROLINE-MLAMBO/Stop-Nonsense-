@@ -8,6 +8,7 @@ import {
 import { Server, Socket } from 'socket.io';
 import { DispatchService } from './dispatch.service';
 import { InfrastructureService } from '../infrastructure/infrastructure.service';
+import { PaymentService } from '../payment/payment.service';
 
 @WebSocketGateway({
   cors: {
@@ -20,7 +21,8 @@ export class DispatchGateway {
 
   constructor(
     private readonly dispatchService: DispatchService,
-    private readonly infraService: InfrastructureService
+    private readonly infraService: InfrastructureService,
+    private readonly paymentService: PaymentService
   ) {}
 
   @SubscribeMessage('updateLocation')
@@ -49,6 +51,14 @@ export class DispatchGateway {
     @MessageBody() data: { userId: string; lat: number; lng: number; address: string },
     @ConnectedSocket() client: Socket
   ) {
+    const isRestricted = await this.paymentService.checkUserRestriction(data.userId);
+    if (isRestricted) {
+       // We still create the incident for safety/logging but don't dispatch
+       await this.dispatchService.createIncident(data.userId, data.lat, data.lng, data.address);
+       client.emit('statusUpdate', { message: 'Account restricted due to outstanding payment. Please settle your balance.' });
+       return { status: 'RESTRICTED' };
+    }
+
     const incident = await this.dispatchService.createIncident(
       data.userId,
       data.lat,

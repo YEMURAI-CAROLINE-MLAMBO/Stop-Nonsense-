@@ -34,6 +34,12 @@ enum TicketStatus {
   RESOLVED
 }
 
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+}
+
 model User {
   id              String       @id @default(uuid())
   phone           String       @unique
@@ -77,6 +83,8 @@ model Incident {
   accessMethod    AccessMethod
   accessContacts  String[]
   resolvedAt      DateTime?
+  paymentStatus   PaymentStatus  @default(PENDING)
+  amount          Float?
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
 
