@@ -19,7 +19,8 @@
       "@instant-guard/validation": ["libs/shared/validation/src/index.ts"],
       "@instant-guard/database": ["libs/shared/database/src/index.ts"],
       "@instant-guard/ui": ["libs/shared/ui/src/index.ts"],
-      "@instant-guard/i18n": ["libs/shared/i18n/src/index.ts"]
+      "@instant-guard/i18n": ["libs/shared/i18n/src/index.ts"],
+      "@instant-guard/voice": ["libs/shared/voice/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

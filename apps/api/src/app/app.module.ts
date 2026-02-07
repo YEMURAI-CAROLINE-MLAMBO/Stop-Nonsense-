@@ -8,6 +8,7 @@ import { AuthService } from './auth/auth.service';
 import { AuthController } from './auth/auth.controller';
 import { SupportService } from './support/support.service';
 import { SupportController } from './support/support.controller';
+import { InfrastructureService } from './infrastructure/infrastructure.service';
 
 @Module({
   imports: [],
@@ -19,6 +20,7 @@ import { SupportController } from './support/support.controller';
     PrismaService,
     AuthService,
     SupportService,
+    InfrastructureService,
   ],
 })
 export class AppModule {}

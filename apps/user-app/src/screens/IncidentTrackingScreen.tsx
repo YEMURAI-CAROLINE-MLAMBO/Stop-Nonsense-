@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import { useVoiceAssistance } from '@instant-guard/voice';
 
 export const IncidentTrackingScreen = ({ route }: any) => {
+  const { speakReassurance } = useVoiceAssistance();
   const { incidentId } = route?.params || { incidentId: 'TEST-123' };
+
+  useEffect(() => {
+    // Simulate receiving responder info after dispatch
+    setTimeout(() => {
+      speakReassurance('Sipho', 4);
+    }, 3000);
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>

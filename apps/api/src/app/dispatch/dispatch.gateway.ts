@@ -7,6 +7,7 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { DispatchService } from './dispatch.service';
+import { InfrastructureService } from '../infrastructure/infrastructure.service';
 
 @WebSocketGateway({
   cors: {
@@ -17,7 +18,10 @@ export class DispatchGateway {
   @WebSocketServer()
   server: Server;
 
-  constructor(private readonly dispatchService: DispatchService) {}
+  constructor(
+    private readonly dispatchService: DispatchService,
+    private readonly infraService: InfrastructureService
+  ) {}
 
   @SubscribeMessage('updateLocation')
   async handleUpdateLocation(
@@ -70,10 +74,11 @@ export class DispatchGateway {
       });
     });
 
-    // SMS Fallback logic (Placeholder)
+    // SMS Fallback logic
     if (responders.length === 0) {
-      console.warn('No online responders found! Triggering SMS fallback to backup services.');
-      // Here you would call a service like Twilio to alert a 24/7 backup control room.
+      await this.infraService.triggerEmergencyBroadcast(incident.id, incident.address);
+      // Notify the user that we are escalating via fallback
+      client.emit('statusUpdate', { message: 'No local units immediately available. Escalating to regional control room...' });
     }
 
     // In a real production app, we would also trigger Push Notifications.

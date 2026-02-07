@@ -5,6 +5,7 @@ import { HomeScreen } from '../screens/HomeScreen';
 import { IncidentTrackingScreen } from '../screens/IncidentTrackingScreen';
 import { HistoryScreen } from '../screens/HistoryScreen';
 import { SupportScreen } from '../screens/SupportScreen';
+import { PostIncidentScreen } from '../screens/PostIncidentScreen';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,7 @@ export const AppNavigator = () => {
       <Stack.Screen name="IncidentTracking" component={IncidentTrackingScreen} />
       <Stack.Screen name="History" component={HistoryScreen} />
       <Stack.Screen name="Support" component={SupportScreen} />
+      <Stack.Screen name="PostIncident" component={PostIncidentScreen} />
     </Stack.Navigator>
   );
 };

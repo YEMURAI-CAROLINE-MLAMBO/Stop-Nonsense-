@@ -32,7 +32,10 @@ export const ResponderHomeScreen = ({ navigation }: any) => {
         </Text>
       </View>
 
-      <View style={styles.stats}>
+      <TouchableOpacity
+        style={styles.stats}
+        onPress={() => navigation.navigate('Earnings')}
+      >
         <View style={styles.statBox}>
           <Text style={styles.statValue}>0</Text>
           <Text style={styles.statLabel}>Jobs Today</Text>
@@ -41,7 +44,7 @@ export const ResponderHomeScreen = ({ navigation }: any) => {
           <Text style={styles.statValue}>R0.00</Text>
           <Text style={styles.statLabel}>Earnings</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
