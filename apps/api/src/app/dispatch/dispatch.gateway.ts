@@ -24,9 +24,20 @@ export class DispatchGateway {
     @MessageBody() data: { lat: number; lng: number; responderId: string },
     @ConnectedSocket() client: Socket
   ) {
-    // In a real app, we'd use the authenticated user from the socket
-    console.log(`Location update from ${data.responderId}: ${data.lat}, ${data.lng}`);
-    // Update responder location in DB (omitted for brevity in this step)
+    await this.dispatchService.updateResponderLocation(data.responderId, data.lat, data.lng);
+  }
+
+  @SubscribeMessage('toggleDuty')
+  async handleToggleDuty(
+    @MessageBody() data: { responderId: string; isOnline: boolean },
+    @ConnectedSocket() client: Socket
+  ) {
+    await this.dispatchService.updateResponderStatus(data.responderId, data.isOnline);
+    if (data.isOnline) {
+      client.join(`responder_${data.responderId}`);
+    } else {
+      client.leave(`responder_${data.responderId}`);
+    }
   }
 
   @SubscribeMessage('triggerPanic')
@@ -42,20 +53,41 @@ export class DispatchGateway {
     );
 
     // Find nearest responders
-    const responders = await this.dispatchService.findNearestResponders(
+    const responders: any[] = await this.dispatchService.findNearestResponders(
       data.lat,
       data.lng,
       5 // 5km radius
     );
 
-    // Notify responders (this would use push notifications or web sockets)
-    this.server.emit('newIncident', {
-      incidentId: incident.id,
-      address: incident.address,
-      lat: incident.lat,
-      lng: incident.lng,
+    // Notify targeted responders
+    responders.forEach(responder => {
+      this.server.to(`responder_${responder.id}`).emit('newIncident', {
+        incidentId: incident.id,
+        address: incident.address,
+        lat: incident.lat,
+        lng: incident.lng,
+        accessMethod: incident.accessMethod,
+      });
     });
 
+    // SMS Fallback logic (Placeholder)
+    if (responders.length === 0) {
+      console.warn('No online responders found! Triggering SMS fallback to backup services.');
+      // Here you would call a service like Twilio to alert a 24/7 backup control room.
+    }
+
+    // In a real production app, we would also trigger Push Notifications.
+    console.log(`Dispatched incident ${incident.id} to ${responders.length} responders.`);
+
     return { incidentId: incident.id, status: 'DISPATCHING' };
+  }
+
+  // Voice Context recording placeholder
+  @SubscribeMessage('uploadAudioContext')
+  async handleAudioContext(
+    @MessageBody() data: { incidentId: string; audioBase64: string }
+  ) {
+    console.log(`Received audio context for incident ${data.incidentId}`);
+    // Save to S3 and link to incident
   }
 }

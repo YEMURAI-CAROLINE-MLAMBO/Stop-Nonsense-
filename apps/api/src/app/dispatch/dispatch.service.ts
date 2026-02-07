@@ -26,6 +26,20 @@ export class DispatchService {
     `;
   }
 
+  async updateResponderLocation(responderId: string, lat: number, lng: number) {
+    return this.prisma.responder.update({
+      where: { id: responderId },
+      data: { currentLat: lat, currentLng: lng },
+    });
+  }
+
+  async updateResponderStatus(responderId: string, isOnline: boolean) {
+    return this.prisma.responder.update({
+      where: { id: responderId },
+      data: { isOnline },
+    });
+  }
+
   async createIncident(userId: string, lat: number, lng: number, address: string) {
     const user = await this.prisma.user.findUnique({ where: { id: userId } });
     if (!user) throw new Error('User not found');
@@ -61,6 +75,24 @@ export class DispatchService {
           status: IncidentStatus.EN_ROUTE,
         },
       });
+    });
+  }
+
+  async updateIncidentStatus(incidentId: string, status: IncidentStatus) {
+    return this.prisma.incident.update({
+      where: { id: incidentId },
+      data: {
+        status,
+        resolvedAt: status === IncidentStatus.RESOLVED ? new Date() : undefined,
+      },
+    });
+  }
+
+  async getIncidentHistory(userId: string) {
+    return this.prisma.incident.findMany({
+      where: { userId },
+      orderBy: { createdAt: 'desc' },
+      include: { responder: true },
     });
   }
 }

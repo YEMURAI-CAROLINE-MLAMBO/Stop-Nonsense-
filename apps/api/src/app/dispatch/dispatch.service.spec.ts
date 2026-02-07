@@ -47,4 +47,28 @@ describe('DispatchService', () => {
     expect(result).toBeDefined();
     expect(mockPrismaService.incident.create).toHaveBeenCalled();
   });
+
+  it('should handle full lifecycle: accept -> update status -> resolve', async () => {
+    const incidentId = 'inc-1';
+    const responderId = 'resp-1';
+
+    // Mock accept
+    mockPrismaService.incident.findUnique.mockResolvedValue({ id: incidentId, status: IncidentStatus.DISPATCHING });
+    mockPrismaService.incident.update.mockResolvedValue({ id: incidentId, status: IncidentStatus.EN_ROUTE });
+
+    await service.acceptIncident(incidentId, responderId);
+    expect(mockPrismaService.incident.update).toHaveBeenCalledWith({
+      where: { id: incidentId },
+      data: { responderId, status: IncidentStatus.EN_ROUTE },
+    });
+
+    // Mock resolve
+    mockPrismaService.incident.update.mockResolvedValue({ id: incidentId, status: IncidentStatus.RESOLVED });
+    await service.updateIncidentStatus(incidentId, IncidentStatus.RESOLVED);
+
+    expect(mockPrismaService.incident.update).toHaveBeenCalledWith({
+      where: { id: incidentId },
+      data: expect.objectContaining({ status: IncidentStatus.RESOLVED }),
+    });
+  });
 });
