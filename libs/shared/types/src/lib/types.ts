@@ -1,0 +1,15 @@
+export enum IncidentStatus {
+  PENDING = 'PENDING',
+  DISPATCHING = 'DISPATCHING',
+  EN_ROUTE = 'EN_ROUTE',
+  ON_SITE = 'ON_SITE',
+  RESOLVED = 'RESOLVED',
+  CANCELLED = 'CANCELLED',
+}
+
+export enum AccessMethod {
+  REMOTE_OPEN = 'REMOTE_OPEN',
+  GUARD_ON_DUTY = 'GUARD_ON_DUTY',
+  OPEN_STREET = 'OPEN_STREET',
+  INTERCOM = 'INTERCOM',
+}

@@ -1,0 +1,97 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [postgis]
+}
+
+enum AccessMethod {
+  REMOTE_OPEN
+  GUARD_ON_DUTY
+  OPEN_STREET
+  INTERCOM
+}
+
+enum IncidentStatus {
+  PENDING
+  DISPATCHING
+  EN_ROUTE
+  ON_SITE
+  RESOLVED
+  CANCELLED
+}
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+}
+
+model User {
+  id              String       @id @default(uuid())
+  phone           String       @unique
+  name            String
+  address         String?
+  accessMethod    AccessMethod?
+  accessContacts  String[]     // Array of phone numbers
+  isRestricted    Boolean      @default(false)
+  incidents       Incident[]
+  tickets         SupportTicket[]
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@map("users")
+}
+
+model Responder {
+  id              String       @id @default(uuid())
+  phone           String       @unique
+  name            String
+  isOnline        Boolean      @default(false)
+  currentLat      Float?
+  currentLng      Float?
+  incidents       Incident[]
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@map("responders")
+}
+
+model Incident {
+  id              String         @id @default(uuid())
+  userId          String
+  user            User           @relation(fields: [userId], references: [id])
+  responderId     String?
+  responder       Responder?     @relation(fields: [responderId], references: [id])
+  status          IncidentStatus @default(PENDING)
+  lat             Float
+  lng             Float
+  address         String
+  accessMethod    AccessMethod
+  accessContacts  String[]
+  resolvedAt      DateTime?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@map("incidents")
+}
+
+model SupportTicket {
+  id              String       @id @default(uuid())
+  userId          String
+  user            User         @relation(fields: [userId], references: [id])
+  subject         String
+  message         String
+  status          TicketStatus @default(OPEN)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@map("support_tickets")
+}
