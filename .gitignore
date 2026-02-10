@@ -112,3 +112,7 @@ yarn-error.log
 
 
 vite.config.*.timestamp*
+
+# Next.js
+.next
+out

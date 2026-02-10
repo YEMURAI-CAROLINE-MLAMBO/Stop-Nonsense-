@@ -1,0 +1,45 @@
+:root {
+  --rb-red: #e0040b;
+  --rb-blue: #001e62;
+  --rb-yellow: #ffcc00;
+  --dark-bg: #0a0a0a;
+  --card-bg: #1a1a1a;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+}
+
+body {
+  background-color: var(--dark-bg);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.rb-gradient {
+  background: linear-gradient(135deg, var(--rb-blue) 0%, #000 100%);
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.pulse {
+  animation: pulse-animation 2s infinite;
+}
+
+@keyframes pulse-animation {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.glitch-text {
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 2px;
+}

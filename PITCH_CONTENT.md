@@ -15,8 +15,8 @@
 **Narrator:** "Meet InstantGuard. The on-demand, speed-first security platform. No contracts. No monthly fees. Just pure, rapid response when you need it most. We’re 'Uber-izing' safety."
 
 **[00:20 - 00:45] THE AI X-FACTOR**
-**(Visual: A digital map of a city. Glowing dots (AI) predict where responders should go. A drone-style view of a complex gate opening automatically.)**
-**Narrator:** "But here’s where it gets smart. We’re using AI to stay two steps ahead. Our **Predictive Dispatch AI** analyzes real-time data to position responders *before* the alarm even rings. And those gated access hurdles? Our **AI Access Engine** automatically coordinates with guards and neighbors to clear your path in seconds. We don’t just respond; we predict and penetrate."
+**(Visual: Switch to 'Mission Control' Dashboard. Glowing predictive heatmaps pulse across Johannesburg. A sidebar shows 'AI Access Agent' chatting live with a complex gate guard.)**
+**Narrator:** "But here’s where it gets smart. We’re using AI to stay two steps ahead. Our **Predictive Dispatch AI** analyzes real-time data to position responders *before* the alarm even rings. And those gated access hurdles? Our **AI Access Agent** uses LLMs to coordinate with guards and neighbors, clearing your path in seconds. We don’t just respond; we predict and penetrate."
 
 **[00:45 - 00:55] THE IMPACT**
 **(Visual: Diverse faces—students, families, shop owners—looking relieved/safe. The phrase 'SAFETY DEMOCRATIZED' appears in bold.)**
@@ -48,9 +48,11 @@
     - **First-to-Accept Logic:** Massive speed advantage over traditional dispatch.
     - **Zero-Friction Onboarding:** Secure your home in under 60 seconds.
 
-**Slide 4: The AI Competitive Edge**
+**Slide 4: The AI Competitive Edge (Live Demo)**
+- **Visual:** Show the Mission Control 'Heatmap' and 'Access Log'.
 - **AI Feature 1: Predictive Positioning.** Moving from reactive to proactive using historical crime/incident patterns.
 - **AI Feature 2: Automated Access Coordination.** LLM-driven notifications to neighborhood networks and security guards to facilitate entry.
+- **Human Touch:** Integrated Voice-to-Action (STT) for hands-free panic triggers.
 
 **Slide 5: Business Model & Market**
 - **Model:** Transparent flat-fee per dispatch.

@@ -7,6 +7,8 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { DispatchService } from './dispatch.service';
+import { PredictiveDispatchService } from './predictive-dispatch.service';
+import { AccessCoordinationService } from './access-coordination.service';
 
 @WebSocketGateway({
   cors: {
@@ -17,7 +19,31 @@ export class DispatchGateway {
   @WebSocketServer()
   server: Server;
 
-  constructor(private readonly dispatchService: DispatchService) {}
+  constructor(
+    private readonly dispatchService: DispatchService,
+    private readonly predictiveDispatchService: PredictiveDispatchService,
+    private readonly accessCoordinationService: AccessCoordinationService
+  ) {}
+
+  @SubscribeMessage('getPredictiveHotspots')
+  async handleGetPredictiveHotspots() {
+    const hotspots = await this.predictiveDispatchService.getPredictiveHotspots();
+    this.server.emit('predictiveHotspotsUpdate', hotspots);
+    return hotspots;
+  }
+
+  @SubscribeMessage('coordinateAccess')
+  async handleCoordinateAccess(
+    @MessageBody() data: { incidentId: string; address: string; contactType: string }
+  ) {
+    const coordination = await this.accessCoordinationService.coordinateAccess(
+      data.incidentId,
+      data.address,
+      data.contactType
+    );
+    this.server.emit('accessCoordinationUpdate', coordination);
+    return coordination;
+  }
 
   @SubscribeMessage('updateLocation')
   async handleUpdateLocation(
