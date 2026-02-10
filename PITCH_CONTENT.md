@@ -1,6 +1,6 @@
-# InstantGuard: Red Bull Basement Pitch Content
+# InstantGuard: Pitch Content
 
-## 1. 60-Second Video Script (Red Bull Style)
+## 1. 60-Second Video Script (High-Energy Style)
 
 **Visual Style:** Fast cuts, urban Johannesburg/South Africa backdrops, app mockups, and high-energy motion graphics.
 
@@ -23,7 +23,7 @@
 **Narrator:** "We’re democratizing security. From the suburbs to the shared yards—everyone deserves a guardian. One tap. One flat fee. Absolute peace of mind."
 
 **[00:55 - 01:00] THE CALL TO ACTION**
-**(Visual: Red Bull Basement logo next to InstantGuard. Text: 'JOIN THE REVOLUTION'.)**
+**(Visual: Innovation Competition logo next to InstantGuard. Text: 'JOIN THE REVOLUTION'.)**
 **Narrator:** "This isn’t just an app; it’s a lifeline. We are InstantGuard. And we’re rewriting the rules of safety. Are you in?"
 
 ---
@@ -64,7 +64,8 @@
 
 **Slide 7: The Team & "The Ask"**
 - **Headline:** Let’s Make South Africa Safer.
-- **Content:** Why we are the team to build this. Red Bull Basement 2026 is the fuel we need to scale.
+- **Team:** Ak (Founder) & the InstantGuard Tech Team.
+- **Content:** Why we are the team to build this. This competition is the fuel we need to scale.
 
 ---
 

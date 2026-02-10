@@ -1,7 +1,7 @@
 :root {
-  --rb-red: #e0040b;
-  --rb-blue: #001e62;
-  --rb-yellow: #ffcc00;
+  --brand-red: #e0040b;
+  --brand-blue: #001e62;
+  --brand-yellow: #ffcc00;
   --dark-bg: #0a0a0a;
   --card-bg: #1a1a1a;
   --text-primary: #ffffff;
@@ -16,8 +16,8 @@ body {
   padding: 0;
 }
 
-.rb-gradient {
-  background: linear-gradient(135deg, var(--rb-blue) 0%, #000 100%);
+.brand-gradient {
+  background: linear-gradient(135deg, var(--brand-blue) 0%, #000 100%);
 }
 
 .card {
